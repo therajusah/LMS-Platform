@@ -32,11 +32,16 @@ function Aboutus() {
         <div className="w-1/2 mx-auto my-10 carousel">
           <div id="slide1" className="relative w-full carousel-item">
             <div className="flex flex-col items-center justify-center gap-4 px-[15%]">
-              <img src={apj} className="w-40 border-2 border-gray-400 rounded-full " />
-              <p className="text-xl text-gray-200">Excellence is a continuous process and not an accident.</p>
+              <img
+                src={apj}
+                className="w-40 border-2 border-gray-400 rounded-full "
+              />
+              <p className="text-xl text-gray-200">
+                Excellence is a continuous process and not an accident.
+              </p>
               <h3 className="text-2xl font-semibold">APJ Abdul Kalam</h3>
               <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                <a href="#slide4" className="btn btn-circle">
+                <a href="#slide1" className="btn btn-circle">
                   ❮
                 </a>
                 <a href="#slide2" className="btn btn-circle">
@@ -46,36 +51,66 @@ function Aboutus() {
             </div>
           </div>
           <div id="slide2" className="relative w-full carousel-item">
-            <img src={steveJobs} className="w-full" />
-            <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-              <a href="#slide1" className="btn btn-circle">
-                ❮
-              </a>
-              <a href="#slide3" className="btn btn-circle">
-                ❯
-              </a>
+            <div className="flex flex-col items-center justify-center gap-4 px-[15%]">
+              <img
+                src={steveJobs}
+                className="w-40 border-2 border-gray-400 rounded-full "
+              />
+              <p className="text-xl text-gray-200">
+                Your time is limited, so don't waste it living someone else's
+                life.
+              </p>
+              <h3 className="text-2xl font-semibold">Steve Jobs</h3>
+              <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+                <a href="#slide3" className="btn btn-circle">
+                  ❮
+                </a>
+                <a href="#slide4" className="btn btn-circle">
+                  ❯
+                </a>
+              </div>
             </div>
           </div>
           <div id="slide3" className="relative w-full carousel-item">
-            <img src={einstein} className="w-full" />
-            <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-              <a href="#slide2" className="btn btn-circle">
-                ❮
-              </a>
-              <a href="#slide4" className="btn btn-circle">
-                ❯
-              </a>
+            <div className="flex flex-col items-center justify-center gap-4 px-[15%]">
+              <img
+                src={nelsonMandela}
+                className="w-40 border-2 border-gray-400 rounded-full "
+              />
+              <p className="text-xl text-gray-200">
+                Do not judge me by my successes, judge me by how many times I
+                fell down and got back up again.
+              </p>
+              <h3 className="text-2xl font-semibold">Nelson Mandela</h3>
+              <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+                <a href="#slide4" className="btn btn-circle">
+                  ❮
+                </a>
+                <a href="#slide1" className="btn btn-circle">
+                  ❯
+                </a>
+              </div>
             </div>
           </div>
           <div id="slide4" className="relative w-full carousel-item">
-            <img src={nelsonMandela} className="w-full" />
-            <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-              <a href="#slide3" className="btn btn-circle">
-                ❮
-              </a>
-              <a href="#slide1" className="btn btn-circle">
-                ❯
-              </a>
+            <div className="flex flex-col items-center justify-center gap-4 px-[15%]">
+              <img
+                src={einstein}
+                className="w-40 border-2 border-gray-400 rounded-full "
+              />
+              <p className="text-xl text-gray-200">
+                Imagination is more important than knowledge. Knowledge is
+                limited. Imagination encircles the world
+              </p>
+              <h3 className="text-2xl font-semibold">Einstien</h3>
+              <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+                <a href="#slide1" className="btn btn-circle">
+                  ❮
+                </a>
+                <a href="#slide2" className="btn btn-circle">
+                  ❯
+                </a>
+              </div>
             </div>
           </div>
         </div>
