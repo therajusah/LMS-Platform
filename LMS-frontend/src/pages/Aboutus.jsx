@@ -41,7 +41,7 @@ function Aboutus() {
               </p>
               <h3 className="text-2xl font-semibold">APJ Abdul Kalam</h3>
               <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                <a href="#slide1" className="btn btn-circle">
+                <a href="#slide4" className="btn btn-circle">
                   ❮
                 </a>
                 <a href="#slide2" className="btn btn-circle">
@@ -62,10 +62,10 @@ function Aboutus() {
               </p>
               <h3 className="text-2xl font-semibold">Steve Jobs</h3>
               <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                <a href="#slide3" className="btn btn-circle">
+                <a href="#slide1" className="btn btn-circle">
                   ❮
                 </a>
-                <a href="#slide4" className="btn btn-circle">
+                <a href="#slide3" className="btn btn-circle">
                   ❯
                 </a>
               </div>
@@ -83,10 +83,10 @@ function Aboutus() {
               </p>
               <h3 className="text-2xl font-semibold">Nelson Mandela</h3>
               <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                <a href="#slide4" className="btn btn-circle">
+                <a href="#slide2" className="btn btn-circle">
                   ❮
                 </a>
-                <a href="#slide1" className="btn btn-circle">
+                <a href="#slide4" className="btn btn-circle">
                   ❯
                 </a>
               </div>
@@ -104,10 +104,10 @@ function Aboutus() {
               </p>
               <h3 className="text-2xl font-semibold">Einstien</h3>
               <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                <a href="#slide1" className="btn btn-circle">
+                <a href="#slide3" className="btn btn-circle">
                   ❮
                 </a>
-                <a href="#slide2" className="btn btn-circle">
+                <a href="#slide1" className="btn btn-circle">
                   ❯
                 </a>
               </div>
