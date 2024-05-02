@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { BsPersonCircle } from "react-icons/bs";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import HomeLayout from "../layouts/HomeLayout";
 
@@ -9,7 +9,7 @@ const Signup = () => {
 
   const [Signupdetails, setSignupDetails] = useState({
     email: "",
-    fullname: "",
+    fullName: "",
     password: "",
     avator: "",
   });
@@ -40,7 +40,51 @@ const Signup = () => {
             id="image_uploads"
             accept=".jpg .jpeg .png .svg"
           />
-          
+          <div className="flex flex-col gap-1">
+            <label htmlFor="fullName" className="font-semibold">
+              Name
+            </label>
+            <input
+              required
+              type="text"
+              name="fullName"
+              className="bg-transparent px-2 py-1 border"
+              placeholder="Enter your username..."
+              id="fullName"
+            />
+          </div>
+          <div className="flex flex-col gap-1">
+            <label htmlFor="email" className="font-semibold">
+             Email
+            </label>
+            <input
+              required
+              type="text"
+              name="email"
+              className="bg-transparent px-2 py-1 border"
+              placeholder="Enter your Email"
+              id="email"
+            />
+          </div>
+          <div className="flex flex-col gap-1">
+            <label htmlFor="password" className="font-semibold">
+              Password
+            </label>
+            <input
+              required
+              type="password"
+              name="password"
+              className="bg-transparent px-2 py-1 border"
+              placeholder="Enter your password"
+              id="password"
+            />
+          </div>
+          <button className="mt-2 bg-yellow-800 hover:bg-yellow-600 transition-all ease-in-out duration-0.3s rounded-md py-2 cursor-pointer font-semibold text-lg">
+            Create account
+          </button>
+          <p className="text-center">
+            Already have an account ? <Link to="/login" className="cursor-pointer text-center">Login</Link>
+          </p>
         </form>
       </div>
     </HomeLayout>
