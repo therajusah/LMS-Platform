@@ -1,13 +1,15 @@
 import { useState } from "react";
+import toast from "react-hot-toast";
 import { BsPersonCircle } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
 
+import { isEmail, isValidPassword } from "../helpers/regexMatcher";
 import HomeLayout from "../layouts/HomeLayout";
 
 const Signup = () => {
   const navigate = useNavigate();
 
-  const [Signupdetails, setSignupDetails] = useState({
+  const [signupdetails, setSignupDetails] = useState({
     email: "",
     fullName: "",
     password: "",
@@ -15,22 +17,51 @@ const Signup = () => {
   });
   const [previewImage, setPreviewImage] = useState("");
 
+  
+
+  function onFormSubmit(e) {
+    e.preventDefault();
+    if (
+      !signupdetails.email ||
+      !signupdetails.password ||
+      !signupdetails.fullName 
+    ) {
+      toast.error("please fill all the details");
+      return;
+    }
+    if (signupdetails.fullName.length < 5) {
+      toast.error("Name should be atleast of 5 characters");
+      return;
+    }
+    if (!isEmail(signupdetails.email)) {
+      toast.error("Invalid email provided");
+      return;
+    }
+    if (!isValidPassword(signupdetails.email)) {
+      toast.error(
+        "Invalid password provided, Password must contain 1 digit (1-9), 1 lowercase letter, 1 uppercase letter, 1 underscore, no spaces, 8-16 characters long"
+      );
+      return;
+    }
+  }
+
   return (
     <HomeLayout>
       <div className="flex overflow-x-auto items-center justify-center h-[100vh]">
         <form
+          onSubmit={onFormSubmit}
           noValidate
-          className="flex flex-col justify-center gap-3 rounded-lg p-4 text-white"
+          className="flex flex-col justify-center gap-3 p-4 text-white rounded-lg"
         >
           <h1 className="text-2xl text-center">Registration Page</h1>
           <label htmlFor="image_uploads" className="cursor-pointer">
             {previewImage ? (
               <img
-                className="w-24 h-24 rounded-full m-auto"
+                className="w-24 h-24 m-auto rounded-full"
                 src={previewImage}
               />
             ) : (
-              <BsPersonCircle className="w-24 h-24 rounded-full m-auto" />
+              <BsPersonCircle className="w-24 h-24 m-auto rounded-full" />
             )}
           </label>
           <input
@@ -38,7 +69,7 @@ const Signup = () => {
             className="hidden"
             name="image_uploads"
             id="image_uploads"
-            accept=".jpg .jpeg .png .svg"
+            accept=".jpg, .jpeg, .png, .svg"
           />
           <div className="flex flex-col gap-1">
             <label htmlFor="fullName" className="font-semibold">
@@ -48,20 +79,20 @@ const Signup = () => {
               required
               type="text"
               name="fullName"
-              className="bg-transparent px-2 py-1 border"
+              className="px-2 py-1 bg-transparent border"
               placeholder="Enter your username..."
               id="fullName"
             />
           </div>
           <div className="flex flex-col gap-1">
             <label htmlFor="email" className="font-semibold">
-             Email
+              Email
             </label>
             <input
               required
               type="text"
               name="email"
-              className="bg-transparent px-2 py-1 border"
+              className="px-2 py-1 bg-transparent border"
               placeholder="Enter your Email"
               id="email"
             />
@@ -74,7 +105,7 @@ const Signup = () => {
               required
               type="password"
               name="password"
-              className="bg-transparent px-2 py-1 border"
+              className="px-2 py-1 bg-transparent border"
               placeholder="Enter your password"
               id="password"
             />
@@ -83,7 +114,10 @@ const Signup = () => {
             Create account
           </button>
           <p className="text-center">
-            Already have an account ? <Link to="/login" className="cursor-pointer text-center">Login</Link>
+            Already have an account ?{" "}
+            <Link to="/login" className="text-center cursor-pointer">
+              Login
+            </Link>
           </p>
         </form>
       </div>
