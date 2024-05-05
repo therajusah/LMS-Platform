@@ -20,29 +20,32 @@ const Signup = () => {
 
   function handleUserInput(e) {
     const { name, value } = e.target;
-
     setSignupDetails({
       ...signupdetails,
       [name]: value,
     });
   }
-  function handleAvatar() {
-    e.preventDefault();
+  function handleAvatar(e) {
     const uploadedImage = e.target.files[0];
-    if (!uploadedImage) return;
-    setSignupDetails({
-      ...signupdetails,
-      avatar: uploadedImage,
-    });
-    const fileReader = new fileReader();
+    if (!uploadedImage) {
+      // No file selected, handle this case accordingly
+      console.error("No file selected");
+      return;
+    }
+    const fileReader = new FileReader();
     fileReader.readAsDataURL(uploadedImage);
-    fileReader.addEventListener("load", function (){
-        setPreviewImage(this.result);
-    })
+    fileReader.addEventListener("load", function () {
+      setPreviewImage(this.result);
+      setSignupDetails({
+        ...signupdetails,
+        avatar: uploadedImage,
+      });
+    });
   }
 
   function onFormSubmit(e) {
     e.preventDefault();
+console.log(signupdetails);
     if (
       !signupdetails.email ||
       !signupdetails.password ||
@@ -59,9 +62,9 @@ const Signup = () => {
       toast.error("Invalid email provided");
       return;
     }
-    if (!isValidPassword(signupdetails.email)) {
+    if (!isValidPassword(signupdetails.password)) {
       toast.error(
-        "Invalid password provided, Password must contain 1 digit (1-9), 1 lowercase letter, 1 uppercase letter, 1 underscore, no spaces, 8-16 characters long"
+        "Invalid password provided, Password must contain at least one digit (0-9), one lowercase letter (a-z), one uppercase letter (A-Z), one special character, and be 8-16 characters long"
       );
       return;
     }

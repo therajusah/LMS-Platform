@@ -57,7 +57,7 @@ function Aboutus() {
                 className="w-40 border-2 border-gray-400 rounded-full "
               />
               <p className="text-xl text-gray-200">
-                Your time is limited, so don't waste it living someone else's
+                Your time is limited, so don&apos;t waste it living someone else&apos;s
                 life.
               </p>
               <h3 className="text-2xl font-semibold">Steve Jobs</h3>
