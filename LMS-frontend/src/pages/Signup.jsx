@@ -3,7 +3,7 @@ import toast from "react-hot-toast";
 import { BsPersonCircle } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
 
-import { isEmail, isValidPassword } from "../helpers/regexMatcher";
+import { isEmail, isValidPassword } from "../helpers/regexMatcher.js";
 import HomeLayout from "../layouts/HomeLayout";
 
 const Signup = () => {
@@ -15,16 +15,38 @@ const Signup = () => {
     password: "",
     avator: "",
   });
+
   const [previewImage, setPreviewImage] = useState("");
 
-  
+  function handleUserInput(e) {
+    const { name, value } = e.target;
+
+    setSignupDetails({
+      ...signupdetails,
+      [name]: value,
+    });
+  }
+  function handleAvatar() {
+    e.preventDefault();
+    const uploadedImage = e.target.files[0];
+    if (!uploadedImage) return;
+    setSignupDetails({
+      ...signupdetails,
+      avatar: uploadedImage,
+    });
+    const fileReader = new fileReader();
+    fileReader.readAsDataURL(uploadedImage);
+    fileReader.addEventListener("load", function (){
+        setPreviewImage(this.result);
+    })
+  }
 
   function onFormSubmit(e) {
     e.preventDefault();
     if (
       !signupdetails.email ||
       !signupdetails.password ||
-      !signupdetails.fullName 
+      !signupdetails.fullName
     ) {
       toast.error("please fill all the details");
       return;
@@ -65,6 +87,7 @@ const Signup = () => {
             )}
           </label>
           <input
+            onChange={handleAvatar}
             type="file"
             className="hidden"
             name="image_uploads"
@@ -76,6 +99,8 @@ const Signup = () => {
               Name
             </label>
             <input
+              onChange={handleUserInput}
+              value={signupdetails.fullName}
               required
               type="text"
               name="fullName"
@@ -89,6 +114,8 @@ const Signup = () => {
               Email
             </label>
             <input
+              onChange={handleUserInput}
+              value={signupdetails.email}
               required
               type="text"
               name="email"
@@ -102,6 +129,8 @@ const Signup = () => {
               Password
             </label>
             <input
+              onChange={handleUserInput}
+              value={signupdetails.password}
               required
               type="password"
               name="password"
