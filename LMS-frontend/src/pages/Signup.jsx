@@ -1,34 +1,37 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { BsPersonCircle } from "react-icons/bs";
+import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
 import { isEmail, isValidPassword } from "../helpers/regexMatcher.js";
 import HomeLayout from "../layouts/HomeLayout";
+import { createAccount } from "../redux/slices/authSlice.js";
 
 const Signup = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const [signupdetails, setSignupDetails] = useState({
+  const [signupDetails, setSignupDetails] = useState({
     email: "",
     fullName: "",
     password: "",
-    avator: "",
+    avatar: "",
   });
 
   const [previewImage, setPreviewImage] = useState("");
 
-  function handleUserInput(e) {
+  const handleUserInput = (e) => {
     const { name, value } = e.target;
     setSignupDetails({
-      ...signupdetails,
+      ...signupDetails,
       [name]: value,
     });
-  }
-  function handleAvatar(e) {
+  };
+
+  const handleAvatar = (e) => {
     const uploadedImage = e.target.files[0];
     if (!uploadedImage) {
-      // No file selected, handle this case accordingly
       console.error("No file selected");
       return;
     }
@@ -37,38 +40,61 @@ const Signup = () => {
     fileReader.addEventListener("load", function () {
       setPreviewImage(this.result);
       setSignupDetails({
-        ...signupdetails,
+        ...signupDetails,
         avatar: uploadedImage,
       });
     });
-  }
+  };
 
-  function onFormSubmit(e) {
+  const onFormSubmit = async (e) => {
     e.preventDefault();
-console.log(signupdetails);
-    if (
-      !signupdetails.email ||
-      !signupdetails.password ||
-      !signupdetails.fullName
-    ) {
-      toast.error("please fill all the details");
-      return;
+
+    try {
+      if (
+        !signupDetails.email ||
+        !signupDetails.password ||
+        !signupDetails.fullName
+      ) {
+        toast.error("Please fill in all the details");
+        return;
+      }
+
+      if (signupDetails.fullName.length < 5) {
+        toast.error("Name should be at least 5 characters long");
+        return;
+      }
+
+      if (!isEmail(signupDetails.email)) {
+        toast.error("Invalid email provided");
+        return;
+      }
+
+      if (!isValidPassword(signupDetails.password)) {
+        toast.error("Invalid password provided");
+        return;
+      }
+
+      const response = await dispatch(createAccount(signupDetails));
+      console.log(response);
+      if (!response.payload) {
+        toast.error("Failed to create account");
+        return;
+      }
+
+      navigate("/");
+      toast.success("Account created successfully!");
+
+      setSignupDetails({
+        email: "",
+        fullName: "",
+        password: "",
+        avatar: "",
+      });
+      setPreviewImage("");
+    } catch (error) {
+      console.error("Error creating account:", error);
     }
-    if (signupdetails.fullName.length < 5) {
-      toast.error("Name should be atleast of 5 characters");
-      return;
-    }
-    if (!isEmail(signupdetails.email)) {
-      toast.error("Invalid email provided");
-      return;
-    }
-    if (!isValidPassword(signupdetails.password)) {
-      toast.error(
-        "Invalid password provided, Password must contain at least one digit (0-9), one lowercase letter (a-z), one uppercase letter (A-Z), one special character, and be 8-16 characters long"
-      );
-      return;
-    }
-  }
+  };
 
   return (
     <HomeLayout>
@@ -84,6 +110,7 @@ console.log(signupdetails);
               <img
                 className="w-24 h-24 m-auto rounded-full"
                 src={previewImage}
+                alt="Preview"
               />
             ) : (
               <BsPersonCircle className="w-24 h-24 m-auto rounded-full" />
@@ -103,7 +130,7 @@ console.log(signupdetails);
             </label>
             <input
               onChange={handleUserInput}
-              value={signupdetails.fullName}
+              value={signupDetails.fullName}
               required
               type="text"
               name="fullName"
@@ -118,7 +145,7 @@ console.log(signupdetails);
             </label>
             <input
               onChange={handleUserInput}
-              value={signupdetails.email}
+              value={signupDetails.email}
               required
               type="text"
               name="email"
@@ -133,7 +160,7 @@ console.log(signupdetails);
             </label>
             <input
               onChange={handleUserInput}
-              value={signupdetails.password}
+              value={signupDetails.password}
               required
               type="password"
               name="password"
